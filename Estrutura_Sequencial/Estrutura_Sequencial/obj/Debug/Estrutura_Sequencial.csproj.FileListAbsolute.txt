@@ -1,0 +1,8 @@
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Estrutura_Sequencial\Estrutura_Sequencial\obj\Debug\Estrutura_Sequencial.csproj.AssemblyReference.cache
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Estrutura_Sequencial\Estrutura_Sequencial\obj\Debug\Estrutura_Sequencial.csproj.SuggestedBindingRedirects.cache
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Estrutura_Sequencial\Estrutura_Sequencial\obj\Debug\Estrutura_Sequencial.csproj.CoreCompileInputs.cache
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Estrutura_Sequencial\Estrutura_Sequencial\bin\Debug\Estrutura_Sequencial.exe.config
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Estrutura_Sequencial\Estrutura_Sequencial\bin\Debug\Estrutura_Sequencial.exe
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Estrutura_Sequencial\Estrutura_Sequencial\bin\Debug\Estrutura_Sequencial.pdb
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Estrutura_Sequencial\Estrutura_Sequencial\obj\Debug\Estrutura_Sequencial.exe
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Estrutura_Sequencial\Estrutura_Sequencial\obj\Debug\Estrutura_Sequencial.pdb

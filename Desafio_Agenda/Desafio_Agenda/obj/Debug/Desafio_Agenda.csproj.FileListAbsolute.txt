@@ -1,0 +1,8 @@
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Desafio_Agenda\Desafio_Agenda\bin\Debug\Desafio_Agenda.exe.config
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Desafio_Agenda\Desafio_Agenda\bin\Debug\Desafio_Agenda.exe
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Desafio_Agenda\Desafio_Agenda\bin\Debug\Desafio_Agenda.pdb
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Desafio_Agenda\Desafio_Agenda\obj\Debug\Desafio_Agenda.csproj.AssemblyReference.cache
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Desafio_Agenda\Desafio_Agenda\obj\Debug\Desafio_Agenda.csproj.SuggestedBindingRedirects.cache
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Desafio_Agenda\Desafio_Agenda\obj\Debug\Desafio_Agenda.csproj.CoreCompileInputs.cache
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Desafio_Agenda\Desafio_Agenda\obj\Debug\Desafio_Agenda.exe
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\Desafio_Agenda\Desafio_Agenda\obj\Debug\Desafio_Agenda.pdb
