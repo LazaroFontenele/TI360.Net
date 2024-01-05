@@ -52,6 +52,7 @@ namespace Desafio_Agenda
 
         public static List<string> nomes = new List<string>();
         public static List<long> telefones = new List<long>();
+
         static void GravarContato()
         {
 
@@ -94,10 +95,19 @@ namespace Desafio_Agenda
 
                 nomes.Add(nome);
                 telefones.Add(telefone);
+                Console.WriteLine("Registro gravado com sucesso!");
+
                 while (true)
                 {
-                    Console.WriteLine("Registro gravado com sucesso!");
-                    Console.WriteLine("O que deseja fazer agora? 1 - Gravar outro contato / 2 - Voltar ao menu inicial");
+                    
+                    if (nomes.Count >= 20)
+                    {
+
+                        Console.WriteLine("Você atingiu a quantidade máxima de contatos. Retornando ao menu principal...");
+                        break;
+                    }
+                    Console.WriteLine("O que deseja fazer agora?\n"+
+                                      "1 = Gravar outro contato / 2 = Voltar ao menu inicial");
                     string op = Console.ReadLine();
                     if(op == "1")
                     {
@@ -124,6 +134,10 @@ namespace Desafio_Agenda
                     Console.WriteLine("----------------------------");
                     i++;
                 }
+            }
+            else
+            {
+                Console.WriteLine("Você ainda não tem nenhum contato.");
             }
         }
         static void ExcluirContato()
