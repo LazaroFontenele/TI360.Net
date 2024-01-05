@@ -16,14 +16,14 @@ namespace Desafio_Agenda
             while (opcao != "99")
             {
                 Console.WriteLine("+----------------------------------------------------+\r\n" +
-                              "| Menu Principal                                     |\r\n" +
-                              "| Informe a opção desejada ou 99 para sair           |\r\n" +
-                              "|----------------------------------------------------|\r\n" +
-                              "| 1 = Cadastrar novo Contato na Agenda               |\n" +
-                              "| 2 = Excluir Contato da Agenda                      |\n" +
-                              "| 3 = Listar contatos da Agenda                      |\n" +
-                              "| 4 = Limpar todos os Contatos                       |\n" +
-                              "+----------------------------------------------------+");
+                                  "| Menu Principal                                     |\r\n" +
+                                  "| Informe a opção desejada ou 99 para sair           |\r\n" +
+                                  "|----------------------------------------------------|\r\n" +
+                                  "| 1 = Cadastrar novo Contato na Agenda               |\n" +
+                                  "| 2 = Excluir Contato da Agenda                      |\n" +
+                                  "| 3 = Listar contatos da Agenda                      |\n" +
+                                  "| 4 = Limpar todos os Contatos                       |\n" +
+                                  "+----------------------------------------------------+");
                 opcao = Console.ReadLine();          
                 switch (opcao)
                 {
