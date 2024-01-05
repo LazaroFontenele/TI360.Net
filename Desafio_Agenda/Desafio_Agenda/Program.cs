@@ -11,10 +11,12 @@ namespace Desafio_Agenda
     internal class Program
 
     {
-        static void MostrarMenu()
+        const int maxContatos = 20;
+        const string sair = "99";
+        static void MenuPrincipal()
         {
             string opcao = "";
-            while (opcao != "99")
+            while (opcao != sair)
             {
                 Console.WriteLine("+----------------------------------------------------+\r\n" +
                               "| Menu Principal                                     |\r\n" +
@@ -56,7 +58,7 @@ namespace Desafio_Agenda
         static void GravarContato()
         {
 
-            if (nomes.Count >= 20)
+            if (nomes.Count >= maxContatos)
             {
                 
                 Console.WriteLine("Você atingiu a quantidade máxima de contatos. Não é permitido cadastrar mais de 20 contatos.");
@@ -100,7 +102,7 @@ namespace Desafio_Agenda
                 while (true)
                 {
                     
-                    if (nomes.Count >= 20)
+                    if (nomes.Count >= maxContatos)
                     {
 
                         Console.WriteLine("Você atingiu a quantidade máxima de contatos. Retornando ao menu principal...");
@@ -170,7 +172,7 @@ namespace Desafio_Agenda
         {
             
             Console.WriteLine("AGENDA PESSOAL - MODULO 1");
-            MostrarMenu();
+            MenuPrincipal();
             Console.WriteLine("Programa Finalizado. Pressione qualquer tecla para fechar!");
             Console.ReadKey();
 
