@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,24 +11,27 @@ namespace Desafio_Agenda
     internal class Program
 
     {
-        static void MostrarMenu()
+        const int maxContatos = 20;
+        const string sair = "99";
+        static void MenuPrincipal()
         {
             string opcao = "";
-            while (opcao != "99")
+            while (opcao != sair)
             {
-                Console.WriteLine("+----------------------------------------------------+\n" +
-                                  "| Menu Principal                                     |\n" +
-                                  "| Informe a opção desejada ou 99 para sair           |\n" +
-                                  "|----------------------------------------------------|\n" +
-                                  "| 1 = Cadastrar novo Contato na Agenda               |\n" +
-                                  "| 2 = Excluir Contato da Agenda                      |\n" +
-                                  "| 3 = Listar contatos da Agenda                      |\n" +
-                                  "| 4 = Limpar todos os Contatos                       |\n" +
-                                  "+----------------------------------------------------+");
+                Console.WriteLine("+----------------------------------------------------+\r\n" +
+                              "| Menu Principal                                     |\r\n" +
+                              "| Informe a opção desejada ou 99 para sair           |\r\n" +
+                              "|----------------------------------------------------|\r\n" +
+                              "| 1 = Cadastrar novo Contato na Agenda               |\n" +
+                              "| 2 = Excluir Contato da Agenda                      |\n" +
+                              "| 3 = Listar contatos da Agenda                      |\n" +
+                              "| 4 = Limpar todos os Contatos                       |\n" +
+                              "+----------------------------------------------------+");
                 opcao = Console.ReadLine();          
                 switch (opcao)
                 {
                     default:
+                        Console.WriteLine("Opção inválida. Tente novamente!");
                         break;
                     case "99":
                         Console.WriteLine("Finalizando programa...");
@@ -36,23 +40,25 @@ namespace Desafio_Agenda
                         GravarContato();
                         break;
                     case "2":
+                        ExcluirContato();
                         break;
                     case "3":
                         ListarContatos();
                         break;
                     case "4":
-                       ExcluirContato();
-                       break;
+                        LimparAgenda();
+                        break;
                 }
             }
         }
 
         public static List<string> nomes = new List<string>();
-        public static List<int> telefones = new List<int>();
+        public static List<long> telefones = new List<long>();
+
         static void GravarContato()
         {
 
-            if (nomes.Count >= 20)
+            if (nomes.Count >= maxContatos)
             {
                 
                 Console.WriteLine("Você atingiu a quantidade máxima de contatos. Não é permitido cadastrar mais de 20 contatos.");
@@ -67,16 +73,54 @@ namespace Desafio_Agenda
                     Console.WriteLine("Digite o nome: ");
                     nome = Console.ReadLine();
                 }
-                Console.WriteLine("Digite o telefone: ");
-                int telefone = Convert.ToInt32(Console.ReadLine());
-                while (telefone is int == false)
+                long telefone;
+                while (true)
                 {
-                    Console.WriteLine("Numero de telefone inválido. Tente novamente");
                     Console.WriteLine("Digite o telefone: ");
-                    telefone = Convert.ToInt32(Console.ReadLine());
+                    if (long.TryParse(Console.ReadLine(), out telefone))
+                    {
+                        if (telefone.ToString().Length >= 8)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Número de telefone inválido. Deve ter no mínimo 8 dígitos. Tente novamente");
+                        }
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("Número de telefone inválido. Tente novamente");
+                    }
                 }
+
                 nomes.Add(nome);
                 telefones.Add(telefone);
+                Console.WriteLine("Registro gravado com sucesso!");
+
+                while (true)
+                {
+                    
+                    if (nomes.Count >= maxContatos)
+                    {
+
+                        Console.WriteLine("Você atingiu a quantidade máxima de contatos. Retornando ao menu principal...");
+                        break;
+                    }
+                    Console.WriteLine("O que deseja fazer agora?\n"+
+                                      "1 = Gravar outro contato / 2 = Voltar ao menu inicial");
+                    string op = Console.ReadLine();
+                    if(op == "1")
+                    {
+                        GravarContato();
+                    }
+                    else if(op == "2")
+                    {
+                        break;
+                    }
+                    break;
+                }
             }
         }
         static void ListarContatos()
@@ -92,6 +136,10 @@ namespace Desafio_Agenda
                     Console.WriteLine("----------------------------");
                     i++;
                 }
+            }
+            else
+            {
+                Console.WriteLine("Você ainda não tem nenhum contato.");
             }
         }
         static void ExcluirContato()
@@ -113,12 +161,18 @@ namespace Desafio_Agenda
             {
                Console.WriteLine("Contato não encontrado.");
             }
+
+        }
+        static void LimparAgenda()
+        {
+            nomes.Clear();
+            telefones.Clear();
         }
         public static void Main(string[] args)
         {
             
             Console.WriteLine("AGENDA PESSOAL - MODULO 1");
-            MostrarMenu();
+            MenuPrincipal();
             Console.WriteLine("Programa Finalizado. Pressione qualquer tecla para fechar!");
             Console.ReadKey();
 
