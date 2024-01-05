@@ -19,6 +19,12 @@ namespace Estrutura_Sequencial
             Console.WriteLine("Exercicio 3: ");
             Exercícios.Exercicio3();
 
+
+            for (int carros = 0; carros < 3; carros++)
+            {
+                Console.WriteLine($"Carro{carros}");
+            }
+
             Console.ReadKey();
         }
     }
