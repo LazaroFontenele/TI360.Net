@@ -55,7 +55,7 @@ namespace Desafio_Agenda
         static void GravarContato()
         {
 
-            if (nomes.Count > 20)
+            if (nomes.Count >= 20)
             {
                 
                 Console.WriteLine("Você atingiu a quantidade máxima de contatos. Não é permitido cadastrar mais de 20 contatos.");
@@ -82,7 +82,7 @@ namespace Desafio_Agenda
                         }
                         else
                         {
-                            Console.WriteLine("Número de telefone inválido. Deve ter no mínimo 9 dígitos. Tente novamente");
+                            Console.WriteLine("Número de telefone inválido. Deve ter no mínimo 8 dígitos. Tente novamente");
                         }
                         
                     }
