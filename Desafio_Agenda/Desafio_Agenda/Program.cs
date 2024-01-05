@@ -15,10 +15,10 @@ namespace Desafio_Agenda
             string opcao = "";
             while (opcao != "99")
             {
-                Console.WriteLine("+----------------------------------------------------+\r\n" +
-                                  "| Menu Principal                                     |\r\n" +
-                                  "| Informe a opção desejada ou 99 para sair           |\r\n" +
-                                  "|----------------------------------------------------|\r\n" +
+                Console.WriteLine("+----------------------------------------------------+\n" +
+                                  "| Menu Principal                                     |\n" +
+                                  "| Informe a opção desejada ou 99 para sair           |\n" +
+                                  "|----------------------------------------------------|\n" +
                                   "| 1 = Cadastrar novo Contato na Agenda               |\n" +
                                   "| 2 = Excluir Contato da Agenda                      |\n" +
                                   "| 3 = Listar contatos da Agenda                      |\n" +
