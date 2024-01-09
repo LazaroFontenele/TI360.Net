@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
@@ -15,9 +16,10 @@ namespace Desafio_Agenda
         const string sair = "99";
         static void MenuPrincipal()
         {
-            string opcao = "";
-            while (opcao != sair)
+            
+            while (true)
             {
+                Console.Clear();
                 Console.WriteLine("+----------------------------------------------------+\r\n" +
                               "| Menu Principal                                     |\r\n" +
                               "| Informe a opção desejada ou 99 para sair           |\r\n" +
@@ -27,28 +29,39 @@ namespace Desafio_Agenda
                               "| 3 = Listar contatos da Agenda                      |\n" +
                               "| 4 = Limpar todos os Contatos                       |\n" +
                               "+----------------------------------------------------+");
-                opcao = Console.ReadLine();          
-                switch (opcao)
+               string opcao = Console.ReadLine();          
+               if (opcao == sair)
                 {
-                    default:
-                        Console.WriteLine("Opção inválida. Tente novamente!");
-                        break;
-                    case "99":
-                        Console.WriteLine("Finalizando programa...");
-                        break;
-                    case "1":
-                        GravarContato();
-                        break;
-                    case "2":
-                        ExcluirContato();
-                        break;
-                    case "3":
-                        ListarContatos();
-                        break;
-                    case "4":
-                        LimparAgenda();
-                        break;
+                    Console.WriteLine("Finalizando programa...");
+                    return;
                 }
+                ProcessarOpcao(opcao);
+            }
+        }
+        static void ProcessarOpcao(string opcao)
+        {
+            switch (opcao)
+            {
+
+                case "99":
+                    break;
+                case "1":
+                    GravarContato();
+                    break;
+                case "2":
+                    ExcluirContato();
+                    break;
+                case "3":
+                    ListarContatos();
+                    break;
+                case "4":
+                    LimparAgenda();
+                    break;
+                default:
+                    Console.WriteLine("Opção inválida. Tente novamente!");
+                    Console.WriteLine("Pressione qualquer tecla para continuar...");
+                    Console.ReadKey();
+                    break;
             }
         }
 
@@ -74,12 +87,13 @@ namespace Desafio_Agenda
                     nome = Console.ReadLine();
                 }
                 long telefone;
+                const int minCharTelefone = 8;
                 while (true)
                 {
                     Console.WriteLine("Digite o telefone: ");
                     if (long.TryParse(Console.ReadLine(), out telefone))
                     {
-                        if (telefone.ToString().Length >= 8)
+                        if (telefone.ToString().Length >= minCharTelefone)
                         {
                             break;
                         }
@@ -136,11 +150,17 @@ namespace Desafio_Agenda
                     Console.WriteLine("----------------------------");
                     i++;
                 }
+                Console.WriteLine("Não há mais contatos para exibir!");
+                Console.WriteLine("Pressione qualquer tecla para continuar...");
+                Console.ReadKey();
             }
             else
             {
-                Console.WriteLine("Você ainda não tem nenhum contato.");
+                Console.WriteLine("Nenhum contato na lista.");
+                Console.WriteLine("Pressione qualquer tecla para continuar...");
+                Console.ReadKey();
             }
+
         }
         static void ExcluirContato()
         {
@@ -154,12 +174,16 @@ namespace Desafio_Agenda
                 int removido = nomes.IndexOf(nome);
                 if (removido == -1) 
                 {
-                    Console.WriteLine("Contato excluído com sucesso");
+                    Console.WriteLine("Contato excluído com sucesso!");
+                    Console.WriteLine("Pressione qualquer tecla para continuar...");
+                    Console.ReadKey();
                 }
             }
             else
             {
                Console.WriteLine("Contato não encontrado.");
+               Console.WriteLine("Pressione qualquer tecla para continuar...");
+               Console.ReadKey();
             }
 
         }
