@@ -6,22 +6,25 @@ using System.Threading.Tasks;
 
 namespace BilheteUnico
 {
-    internal class BilheteComum : BilheteUnico
+    internal class BilheteComum : IBilheteUnico
     { 
         public double Saldo { get; set; }
+        public int Codigo { get ; set ; }
+        public Usuario Usuario { get; set;}
+
         public double ValorPassagem = 5.00;
 
-        public override void recarregarBilhete(double valor)
+        public void recarregarBilhete(double valor)
         {
             Saldo += valor;
         }
-        public override void pagarPassagem()
+        public void pagarPassagem()
         {
             Saldo -= ValorPassagem;
             Console.WriteLine("Passagem paga com sucesso!");
 
         }
-        public override List<BilheteUnico> PesquisarBilhetePorCpf(string cpf)
+        public List<BilheteUnico> PesquisarBilhetePorCpf(string cpf)
         {
             throw new NotImplementedException();
         }

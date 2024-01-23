@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BilheteUnico
 {
+
     internal class Usuario
     {
         public string Nome { get; set; }

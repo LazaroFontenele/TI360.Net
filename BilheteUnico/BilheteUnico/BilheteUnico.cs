@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace BilheteUnico
 {
-    internal abstract class BilheteUnico
+    internal interface IBilheteUnico
     {
-        public int Codigo { get; set; }
-        public Usuario Usuario { get; set; }
+        int Codigo { get; set; }
+        Usuario Usuario { get; set; }
 
 
-        public abstract void pagarPassagem();
-        public abstract void recarregarBilhete(double valor);
-        public abstract List<BilheteUnico> PesquisarBilhetePorCpf(string cpf);
+        void pagarPassagem();
+        void recarregarBilhete(double valor);
     }
 }

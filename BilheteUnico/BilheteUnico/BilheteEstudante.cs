@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 
 namespace BilheteUnico
 {
-    internal class BilheteEstudante : BilheteUnico
+    internal class BilheteEstudante : IBilheteUnico
     {
         public int Cotas { get; set; }
+        public int Codigo { get; set; }
+        public Usuario Usuario { get; set ; }
+
         public int CotasEstudante = 48;
         public int ValorPassagemEstudante = 1;
 
-        public override void recarregarBilhete(double valor)
+        public void recarregarBilhete(double valor)
         {
             Cotas += CotasEstudante;
         }
-        public override void pagarPassagem()
+        public void pagarPassagem()
         {
             Cotas -= ValorPassagemEstudante;
         }

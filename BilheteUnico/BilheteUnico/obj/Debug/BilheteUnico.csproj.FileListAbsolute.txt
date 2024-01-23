@@ -1,0 +1,8 @@
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\bin\Debug\BilheteUnico.exe.config
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\bin\Debug\BilheteUnico.exe
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\bin\Debug\BilheteUnico.pdb
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\obj\Debug\BilheteUnico.csproj.AssemblyReference.cache
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\obj\Debug\BilheteUnico.csproj.SuggestedBindingRedirects.cache
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\obj\Debug\BilheteUnico.csproj.CoreCompileInputs.cache
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\obj\Debug\BilheteUnico.exe
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\obj\Debug\BilheteUnico.pdb
