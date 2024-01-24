@@ -8,11 +8,12 @@ namespace BilheteUnico
 {
     internal interface IBilheteUnico
     {
-        int Codigo { get; set; }
+        string Codigo { get; set; }
         Usuario Usuario { get; set; }
 
 
-        void pagarPassagem();
-        void recarregarBilhete(double valor);
+        void PagarPassagem();
+        void RecarregarBilhete(double valor);
+        string GenerateTicketCode();
     }
 }

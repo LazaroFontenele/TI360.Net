@@ -9,16 +9,16 @@ namespace BilheteUnico
     internal class BilheteComum : IBilheteUnico
     { 
         public double Saldo { get; set; }
-        public int Codigo { get ; set ; }
+        public string Codigo { get ; set ; }
         public Usuario Usuario { get; set;}
 
         public double ValorPassagem = 5.00;
 
-        public void recarregarBilhete(double valor)
+        public void RecarregarBilhete(double valor)
         {
             Saldo += valor;
         }
-        public void pagarPassagem()
+        public void PagarPassagem()
         {
             Saldo -= ValorPassagem;
             Console.WriteLine("Passagem paga com sucesso!");
@@ -28,8 +28,16 @@ namespace BilheteUnico
         {
             throw new NotImplementedException();
         }
-
-
+        public string GenerateTicketCode()
+        {
+            Random random = new Random();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 6; i++)
+            {
+                sb.Append(random.Next(10));
+            }        
+            return $"C{sb.ToString()}";
+        }
 
     }
 }
