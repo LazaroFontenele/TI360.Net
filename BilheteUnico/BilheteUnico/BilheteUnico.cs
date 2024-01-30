@@ -10,6 +10,7 @@ namespace BilheteUnico
     {
         string Codigo { get; set; }
         Usuario Usuario { get; set; }
+        double Saldo { get; set; } 
 
 
         void PagarPassagem();

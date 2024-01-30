@@ -20,8 +20,15 @@ namespace BilheteUnico
         }
         public void PagarPassagem()
         {
-            Saldo -= ValorPassagem;
-            Console.WriteLine("Passagem paga com sucesso!");
+            if (Saldo > 5)
+            {
+                Saldo -= ValorPassagem;
+                Console.WriteLine("Passagem paga com sucesso!");
+            }
+            else
+            {
+                Console.WriteLine("Saldo insuficiente");
+            }
 
         }
         public List<BilheteUnico> PesquisarBilhetePorCpf(string cpf)

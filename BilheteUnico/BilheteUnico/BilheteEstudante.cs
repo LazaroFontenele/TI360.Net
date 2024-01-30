@@ -8,7 +8,7 @@ namespace BilheteUnico
 {
     internal class BilheteEstudante : IBilheteUnico
     {
-        public int Cotas { get; set; }
+        public double Saldo { get; set; }
         public string Codigo { get; set; }
         public Usuario Usuario { get; set ; }
 
@@ -17,11 +17,26 @@ namespace BilheteUnico
 
         public void RecarregarBilhete(double valor)
         {
-            Cotas += CotasEstudante;
+            if(CotasEstudante < 48)
+            {
+                Saldo += CotasEstudante;
+            }
+            else
+            {
+                Console.WriteLine("Número máximo de cotas atingido");
+            }
         }
         public void PagarPassagem()
         {
-            Cotas -= ValorPassagemEstudante;
+            if (CotasEstudante > 1)
+            {
+                Saldo -= ValorPassagemEstudante;
+            }
+            else
+            {
+                Console.WriteLine("Saldo insuficiente para realizar o pagamento!");
+            }
+            
         }
         public string GenerateTicketCode()
         {

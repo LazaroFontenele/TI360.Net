@@ -13,21 +13,42 @@ namespace BilheteUnico
 
         public static void AddUser()
         {
-            Usuario user = new Usuario();
+            try
+            {
+                Usuario user = new Usuario();
 
-            Console.WriteLine("Digite o nome: ");
-            user.Nome = Console.ReadLine();
-            Console.WriteLine("Digite o cpf");
-            user.Cpf = Console.ReadLine();
-            Console.WriteLine("Digite o telefone: ");
-            user.Telefone = (int) Convert.ToInt64( Console.ReadLine() ) ;
-            Console.WriteLine("Digite o e-Mail: ");
-            user.Email= Console.ReadLine();
+                Console.WriteLine("Digite o nome: ");
+                user.Nome = Console.ReadLine();
+                Console.WriteLine("Digite o cpf");
+                user.Cpf = Console.ReadLine();
+                VerifyExistingUser(user.Cpf);
+                Console.WriteLine("Digite o telefone: ");
+                user.Telefone = (int)Convert.ToInt64(Console.ReadLine());
+                Console.WriteLine("Digite o e-Mail: ");
+                user.Email = Console.ReadLine();
+                users.Add(user);
 
-            users.Add(user);
+                Console.WriteLine("Usuario adicionado com sucesso");
+            }
+            catch (Exception e)
+            {
 
-            Console.WriteLine("Usuario adicionado com sucesso");
+                Console.WriteLine(e.Message);
+            }
 
+
+        }
+
+        public static void VerifyExistingUser(string cpf)
+        {
+            foreach (Usuario existingUser in users)
+            {
+                if (existingUser.Cpf == cpf)
+                {
+                    throw new Exception ("Usuário já cadastrado");
+                }
+            }
+            
         }
 
         public static void AddTicket()
@@ -53,6 +74,7 @@ namespace BilheteUnico
                     ticket.Usuario = user;
                     tickets.Add(ticket);
                     Console.WriteLine("Bilhete cadastrado com sucesso!");
+                    Console.WriteLine($"Código do bilhete: {ticket.Codigo}");
                     break;
                 }
                 else
@@ -66,30 +88,31 @@ namespace BilheteUnico
                 }
 
             }
-
-
-            
             
         }
+        enum TicketTypes
+        {
+            Comum = 1,
+            Estudante = 2
+        }
+        
 
         public static IBilheteUnico SelectTicketType()
         {
             Console.WriteLine("Tipo de bilhete. 1 - Comum  / 2 - Estudante");
-            int typeTicket = (int)Convert.ToInt16(Console.ReadLine());
-            while (typeTicket != 1 && typeTicket != 2)
+            TicketTypes typeTicket = (TicketTypes)Convert.ToInt16(Console.ReadLine());
+            while (typeTicket != TicketTypes.Comum && typeTicket != TicketTypes.Estudante)
             {
                 Console.WriteLine("Tipo de bilhete inválido! Tente novamente");
                 Console.WriteLine("Tipo de bilhete. 1 - Comum  / 2 - Estudante");
-                typeTicket = (int)Convert.ToInt16(Console.ReadLine());
+                typeTicket = (TicketTypes)Convert.ToInt16(Console.ReadLine());
             }
             IBilheteUnico ticket = null;
-            if (typeTicket == 1)
+            if (typeTicket == TicketTypes.Comum)
             {
                 ticket = new BilheteComum();
-                
-
             }
-            else if (typeTicket == 2)
+            else if (typeTicket == TicketTypes.Estudante)
             {
                 ticket = new BilheteEstudante();
             }
@@ -100,17 +123,70 @@ namespace BilheteUnico
         {
             Console.WriteLine("Digite o valor da recarga: ");
             double valor = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine("Numero do cartão: ");
-            string Ticketcode = Console.ReadLine();
-            IBilheteUnico ticket = tickets.Find(t => t.Codigo == Ticketcode);
-            if (ticket != null)
+            int op = 0;
+            try
             {
-                ticket.RecarregarBilhete(valor);
+                while (op != 99)
+                {
+
+                    Console.WriteLine("Digite o numero do cartão: ");
+                    string Ticketcode = Console.ReadLine();
+                    IBilheteUnico ticket = tickets.Find(t => t.Codigo == Ticketcode);
+                    if (ticket != null)
+                    {
+                        ticket.RecarregarBilhete(valor);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Bilhete não encontrado!");
+                        Console.WriteLine("Pressione qualquer tecla para tentar novamente ou digite 99 para voltar ao menu principal.");
+                        op = Convert.ToInt16(Console.ReadLine());
+                    }
+
+                }
+
             }
+            catch (Exception)
+            {
+
+                RechargeTicket();
+            }
+
+
             
         }
         public static void Pay()
-        { 
+        {
+            int op = 0;
+            try
+            {
+                while (op != 99)
+                {
+
+                    Console.WriteLine("Digite o numero do cartão: ");
+                    string Ticketcode = Console.ReadLine();
+                    IBilheteUnico ticket = tickets.Find(t => t.Codigo == Ticketcode);
+                    if (ticket != null)
+                    {
+                        ticket.PagarPassagem();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Bilhete não encontrado!");
+                        Console.WriteLine("Pressione qualquer tecla para tentar novamente ou digite 99 para voltar ao menu principal.");
+                        op = Convert.ToInt16(Console.ReadLine());
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                Pay();
+            }
 
         }
         public static void ShowTickets()
@@ -121,11 +197,12 @@ namespace BilheteUnico
             foreach (var ticket in tickets)
             {
                 Console.WriteLine($"Bilhete {i}: ");
-                Console.WriteLine($"Nº do bilhete: {ticket.Codigo}");
+                Console.WriteLine($"Código do bilhete: {ticket.Codigo}");
                 Console.WriteLine($"Usuário: {ticket.Usuario.Nome}");
                 Console.WriteLine($"CPF: {ticket.Usuario.Cpf}");
                 Console.WriteLine($"Telefone: {ticket.Usuario.Telefone}");
-                
+                Console.WriteLine($"Saldo: {ticket.Saldo}");
+
                 i++;
                 Console.WriteLine("------------------------------");
             }
