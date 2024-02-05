@@ -8,32 +8,28 @@ namespace BilheteUnico
 {
     internal class BilheteComum : IBilheteUnico
     { 
-        public double Saldo { get; set; }
-        public string Codigo { get ; set ; }
-        public Usuario Usuario { get; set;}
+        public double TicketBalance { get; set; }
+        public string Code { get ; set ; }
+        public Usuario User { get; set;}
 
-        public double ValorPassagem = 5.00;
+        public double TravelFare = 5.00;
 
-        public void RecarregarBilhete(double valor)
+        public void Recharge(double valor)
         {
-            Saldo += valor;
+            TicketBalance += valor;
         }
-        public void PagarPassagem()
+        public void PayPass()
         {
-            if (Saldo > 5)
+            if (TicketBalance > 5)
             {
-                Saldo -= ValorPassagem;
+                TicketBalance -= TravelFare;
                 Console.WriteLine("Passagem paga com sucesso!");
             }
             else
             {
-                Console.WriteLine("Saldo insuficiente");
+                Console.WriteLine("Saldo insuficiente para realizar o pagamento!");
             }
 
-        }
-        public List<BilheteUnico> PesquisarBilhetePorCpf(string cpf)
-        {
-            throw new NotImplementedException();
         }
         public string GenerateTicketCode()
         {

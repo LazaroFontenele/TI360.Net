@@ -8,13 +8,13 @@ namespace BilheteUnico
 {
     internal interface IBilheteUnico
     {
-        string Codigo { get; set; }
-        Usuario Usuario { get; set; }
-        double Saldo { get; set; } 
+        string Code { get; set; }
+        Usuario User { get; set; }
+        double TicketBalance { get; set; } 
 
 
-        void PagarPassagem();
-        void RecarregarBilhete(double valor);
+        void PayPass();
+        void Recharge(double valor);
         string GenerateTicketCode();
     }
 }

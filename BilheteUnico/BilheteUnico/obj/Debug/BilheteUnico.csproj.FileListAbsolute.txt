@@ -6,3 +6,5 @@ C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\obj\Deb
 C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\obj\Debug\BilheteUnico.csproj.CoreCompileInputs.cache
 C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\obj\Debug\BilheteUnico.exe
 C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\obj\Debug\BilheteUnico.pdb
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\bin\Debug\System.ComponentModel.Annotations.dll
+C:\Users\Lazaro\Documents\TI360\.NET_Developer\BilheteUnico\BilheteUnico\obj\Debug\BilheteUnico.csproj.CopyComplete

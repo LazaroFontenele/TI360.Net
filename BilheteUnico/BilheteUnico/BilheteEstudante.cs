@@ -8,29 +8,53 @@ namespace BilheteUnico
 {
     internal class BilheteEstudante : IBilheteUnico
     {
-        public double Saldo { get; set; }
-        public string Codigo { get; set; }
-        public Usuario Usuario { get; set ; }
+        public double TicketBalance { get; set; }
+        public string Code { get; set; }
+        public Usuario User { get; set ; }
 
         public int CotasEstudante = 48;
-        public int ValorPassagemEstudante = 1;
+        public int ticketStudentValue = 1;
 
-        public void RecarregarBilhete(double valor)
+        public void Recharge(double value)
         {
-            if(CotasEstudante < 48)
+            if (TicketBalance < CotasEstudante)
             {
-                Saldo += CotasEstudante;
+                double valueRec = value + TicketBalance;
+                if (valueRec > CotasEstudante)
+                {
+                    Console.WriteLine($"O valor de recarga {value} somado ao seu saldo atual ultrapassa o limite de cotas permitida.");
+                    double newValue = CotasEstudante - TicketBalance;
+                    double valueChanged = Math.Floor(newValue);
+                    Console.WriteLine($"O valor de recarga foi corrigido para {valueChanged}.");
+                    double refund = value - valueChanged;
+                    Console.WriteLine($"Valor a receber de volta nessa operação: {refund}");
+                    value = newValue;
+                }
+                if (value % 1 == 0)
+                {
+                    TicketBalance += value;
+                    Console.WriteLine("Recarga realizada com sucesso!");
+                }
+                else
+                {
+                    double valueChanged = Math.Floor(value);
+                    TicketBalance += valueChanged;
+                    Console.WriteLine("Não é possível recarregar um valor decimal. O valor foi corrigido para " + valueChanged + ".");
+                    Console.WriteLine("Recarga realizada com sucesso!");
+                }
+
             }
             else
             {
                 Console.WriteLine("Número máximo de cotas atingido");
             }
+            Console.WriteLine($"Saldo: {TicketBalance}");
         }
-        public void PagarPassagem()
+        public void PayPass()
         {
-            if (CotasEstudante > 1)
+            if (TicketBalance >= 1)
             {
-                Saldo -= ValorPassagemEstudante;
+                TicketBalance -= ticketStudentValue;
             }
             else
             {
@@ -41,8 +65,12 @@ namespace BilheteUnico
         public string GenerateTicketCode()
         {
             Random random = new Random();
-            int ticketCode = random.Next(0, 5);
-            return $"E{ticketCode}";
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 6; i++)
+            {
+                sb.Append(random.Next(10));
+            }
+            return $"E{sb.ToString()}";
         }
 
     }

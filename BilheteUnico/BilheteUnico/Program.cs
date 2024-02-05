@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,25 @@ namespace BilheteUnico
         static List<Usuario> users = new List<Usuario>();
         static List<IBilheteUnico> tickets = new List<IBilheteUnico>();
 
+        public static bool CheckValidPhoneNumber(string phoneNumber)
+        {
+            string numberWithoutSpace = phoneNumber.Replace(" ", "");
+
+            if (numberWithoutSpace.Length != 11)
+            {
+                return false;
+            }
+
+            foreach (char c in numberWithoutSpace)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public static void AddUser()
         {
             try
@@ -18,15 +38,46 @@ namespace BilheteUnico
                 Usuario user = new Usuario();
 
                 Console.WriteLine("Digite o nome: ");
-                user.Nome = Console.ReadLine();
-                Console.WriteLine("Digite o cpf");
-                user.Cpf = Console.ReadLine();
+                user.Name = Console.ReadLine();
+                bool validCpf = false;
+                do
+                {
+                    Console.WriteLine("Digite o cpf: ");
+                    user.Cpf = Console.ReadLine();
+
+                    validCpf = Usuario.ValidateCpf(user.Cpf);
+
+                    if (!validCpf)
+                    {
+                        Console.WriteLine("CPF inválido. Tente novamente!");
+                    }
+
+                } while (!validCpf);
                 VerifyExistingUser(user.Cpf);
                 Console.WriteLine("Digite o telefone: ");
-                user.Telefone = (int)Convert.ToInt64(Console.ReadLine());
-                Console.WriteLine("Digite o e-Mail: ");
-                user.Email = Console.ReadLine();
-                users.Add(user);
+                user.Phone = Console.ReadLine();
+                bool validFormatPhone = CheckValidPhoneNumber(user.Phone);
+                while (!validFormatPhone)
+                {
+                    Console.WriteLine("Número de telefone inválido. Deve ter 11 dígitos somente números, no formato XXXXXXXXXXX.");
+                    user.Phone = Console.ReadLine();
+                    validFormatPhone = CheckValidPhoneNumber(user.Phone);
+                }
+                do
+                {
+                    Console.WriteLine("Digite o e-Mail: ");
+                    user.Email = Console.ReadLine();
+                    users.Add(user);
+                    if (!Usuario.IsValidEmail(user.Email))
+                    {
+                        Console.WriteLine("E-mail inválido. Tente novamente!");
+                    }
+                } while ((!Usuario.IsValidEmail(user.Email)));
+
+    {
+
+                }
+
 
                 Console.WriteLine("Usuario adicionado com sucesso");
             }
@@ -38,7 +89,6 @@ namespace BilheteUnico
 
 
         }
-
         public static void VerifyExistingUser(string cpf)
         {
             foreach (Usuario existingUser in users)
@@ -70,11 +120,11 @@ namespace BilheteUnico
                 if (user != null)
                 {
                     IBilheteUnico ticket = SelectTicketType();
-                    ticket.Codigo = ticket.GenerateTicketCode();
-                    ticket.Usuario = user;
+                    ticket.Code = ticket.GenerateTicketCode();
+                    ticket.User = user;
                     tickets.Add(ticket);
                     Console.WriteLine("Bilhete cadastrado com sucesso!");
-                    Console.WriteLine($"Código do bilhete: {ticket.Codigo}");
+                    Console.WriteLine($"Código do bilhete: {ticket.Code}");
                     break;
                 }
                 else
@@ -131,10 +181,10 @@ namespace BilheteUnico
 
                     Console.WriteLine("Digite o numero do cartão: ");
                     string Ticketcode = Console.ReadLine();
-                    IBilheteUnico ticket = tickets.Find(t => t.Codigo == Ticketcode);
+                    IBilheteUnico ticket = tickets.Find(t => t.Code == Ticketcode);
                     if (ticket != null)
                     {
-                        ticket.RecarregarBilhete(valor);
+                        ticket.Recharge(valor);
                         break;
                     }
                     else
@@ -163,13 +213,12 @@ namespace BilheteUnico
             {
                 while (op != 99)
                 {
-
-                    Console.WriteLine("Digite o numero do cartão: ");
+                    Console.WriteLine("Código do cartão: ");
                     string Ticketcode = Console.ReadLine();
-                    IBilheteUnico ticket = tickets.Find(t => t.Codigo == Ticketcode);
+                    IBilheteUnico ticket = tickets.Find(t => t.Code == Ticketcode);
                     if (ticket != null)
                     {
-                        ticket.PagarPassagem();
+                        ticket.PayPass();
                         break;
                     }
                     else
@@ -197,26 +246,51 @@ namespace BilheteUnico
             foreach (var ticket in tickets)
             {
                 Console.WriteLine($"Bilhete {i}: ");
-                Console.WriteLine($"Código do bilhete: {ticket.Codigo}");
-                Console.WriteLine($"Usuário: {ticket.Usuario.Nome}");
-                Console.WriteLine($"CPF: {ticket.Usuario.Cpf}");
-                Console.WriteLine($"Telefone: {ticket.Usuario.Telefone}");
-                Console.WriteLine($"Saldo: {ticket.Saldo}");
+                Console.WriteLine($"Código do bilhete: {ticket.Code}");
+                Console.WriteLine($"Usuário: {ticket.User.Name}");
+                Console.WriteLine($"CPF: {ticket.User.Cpf}");
+                Console.WriteLine($"Telefone: {ticket.User.Phone}");
+                Console.WriteLine($"Saldo: {ticket.TicketBalance}");
 
                 i++;
                 Console.WriteLine("------------------------------");
             }
             Console.WriteLine("----- Fim da lista -----");
-            Console.WriteLine("----- Pressione qualquer tecla para continuar -----");
-            Console.ReadKey(); 
         }
         public static void SearchTicketByCpf()
         {
+            Console.WriteLine("Digite o CPF: ");
+            string cpf = Console.ReadLine();
+            try
+            {
+                List<IBilheteUnico> TicketsFound = tickets.FindAll(x => x.User.Cpf == cpf);
+                int numTickets = TicketsFound.Count;
+                Console.WriteLine($"Forma encontrados {numTickets} cartões para este usuário.");
+                string userName = TicketsFound.First().User.Name;
+                Console.WriteLine($"Nome do Usuário: {userName}");
+                foreach (var item in TicketsFound)
+                {
+                    Console.WriteLine("--------------------------------");
+                    Console.WriteLine($"Código do cartão: {item.Code}");
+                    Console.WriteLine($"Saldo: {item.TicketBalance}");
+                    ;
+                    Console.WriteLine("--------------------------------");
+
+                }
+
+            }
+            catch (InvalidOperationException)
+            {
+
+                return;
+            }
 
 
+            Console.WriteLine("--------Fim da Lista--------");
         }
         static void Main(string[] args)
         {
+            
             int option = 0;
             while (option != 99)
             {
@@ -268,8 +342,11 @@ namespace BilheteUnico
                 {
                     Console.WriteLine("Opção Inválida! Tente novamente.");
                 }
-
-                Console.WriteLine();
+                Console.WriteLine("Retornando ao menu principal...");
+                Console.WriteLine("Pressione qualquer tecla para continuar");
+                Console.ReadKey();
+                Console.Clear();
+                
             }
 
         }
